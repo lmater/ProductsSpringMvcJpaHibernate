@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Produits</title>
+<link rel="stylesheet" type="text/css"
+	href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css"
+	href="../static/css/style.css"
+	th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div class="container spacer">
+		<form th:action="@{/user/index}" method="get">
+			<label>Mot clet:</label> <input type="text" name="mc"
+				th:value="${mc}" />
+			<button class="btn btn-primary">Chercher</button>
+			<a th:href="@{/admin/form}">Add</a>
+			<a th:href="@{/login?logout}" th:inline="text">[[${#httpServletRequest.remoteUser}]]</a>
+		</form>
+	</div>
+	<div class="container">
+		<h3>Liste des Produits</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Designation</th>
+					<th>Prix</th>
+					<th>Quantite</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="p:${listProduits}">
+					<td th:text="${p.id}"></td>
+					<td th:text="${p.designation}"></td>
+					<td th:text="${p.prix}"></td>
+					<td th:text="${p.quantite}"></td>
+					<td >
+					<a onclick="return confirm('are you sure to delete?')"
+					 th:href="@{/admin/delete(id=${p.id},mc=${mc},page=${pageCourante},size=${size})}">Delete</a></td>
+				<td >
+					<a onclick="return confirm('are you sure to edit?')"
+					 th:href="@{/admin/edit(id=${p.id})}">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<div class="container">
+		<ul class="nav nav-pills">
+			<li th:each="pa,status:${pages}"
+				th:class="${pageCourante}==${status.index}? 'active' : ''"><a
+				th:class="btn"
+				th:href="@{/user/index(page=${status.index},size=${size},mc=${mc})}"
+				th:text="${status.index}"></a></li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Confirmation</title>
+<link rel="stylesheet" type="text/css"
+	href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+	<link rel="stylesheet" type="text/css"
+	href="../static/css/style.css"
+	th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="panel panel-default ">
+					<a th:href="@{/login?logout}" th:inline="text">[[${#httpServletRequest.remoteUser}]]</a>
+			<h3 class="red">You have not the right to acces to this ressource</h3>
+		</div>
+	</div>
+</body>
+</html>
