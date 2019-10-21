@@ -32,7 +32,7 @@ public class ProduitController {
 //		model.addAttribute("listProduits", produits);
 
 //		Page<Produit> pageProduits = produitRepository.findAll(new PageRequest(p, s));
-		Page<Produit> pageProduits = produitRepository.chercher("%" + motClet + "%", new PageRequest(p, s));
+		Page<Produit> pageProduits = produitRepository.chercher("%" + motClet + "%", PageRequest.of(p, s));
 		model.addAttribute("listProduits", pageProduits.getContent());
 		int[] pages = new int[pageProduits.getTotalPages()];
 		model.addAttribute("pages", pages);
@@ -75,11 +75,11 @@ public class ProduitController {
 	public String home() {
 		return "redirect:/user/index";
 	}
+
 	@RequestMapping(value = "/user/403")
 	public String accessDenied() {
 		return "403";
 	}
-	
 
 	@RequestMapping(value = "/login")
 	public String login() {
