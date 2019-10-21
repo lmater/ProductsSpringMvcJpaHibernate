@@ -32,6 +32,7 @@ public class ProduitController {
 //		model.addAttribute("listProduits", produits);
 
 //		Page<Produit> pageProduits = produitRepository.findAll(new PageRequest(p, s));
+		
 		Page<Produit> pageProduits = produitRepository.chercher("%" + motClet + "%", PageRequest.of(p, s));
 		model.addAttribute("listProduits", pageProduits.getContent());
 		int[] pages = new int[pageProduits.getTotalPages()];
